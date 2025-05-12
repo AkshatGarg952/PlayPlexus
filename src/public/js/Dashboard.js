@@ -37,7 +37,7 @@ let id = userId || teamId;
 // Fetch sent requests
 async function fetchSentUsers(id) {
     try {
-        const response = await fetch(`https://playplexus.onrender.com/api/requests/sender/${id}`);
+        const response = await fetch(`/api/requests/sender/${id}`);
         if (!response.ok) throw new Error('Failed to fetch sent requests');
         const data = await response.json();
         
@@ -58,7 +58,7 @@ async function fetchSentUsers(id) {
 // Fetch received requests
 async function fetchReceivedUsers(id) {
     try {
-        const response = await fetch(`https://playplexus.onrender.com/api/requests/receiver/${id}`);
+        const response = await fetch(`/api/requests/receiver/${id}`);
         if (!response.ok) throw new Error('Failed to fetch received requests');
         const data = await response.json();
         
