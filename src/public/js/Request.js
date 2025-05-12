@@ -55,13 +55,13 @@ filter.addEventListener('change', function () {
     const selectedValue = this.value;
     
     if (selectedValue === 'All Sended') {
-        let url = `http://localhost:3000/api/requests/sended`;
+        let url = `/api/requests/sended`;
         fetchRequests(url);
     } else if (selectedValue === "All Received") {
-        let url = `http://localhost:3000/api/requests/received`;
+        let url = `/api/requests/received`;
         fetchRequests(url);
     } else {
-        let url = `http://localhost:3000/api/requests/details`;
+        let url = `/api/requests/details`;
         fetchRequests(url);
     }
 });
@@ -225,7 +225,7 @@ function displayRequests(requestsToDisplay) {
 
 async function handleRequestAction(requestId, action) {
     try {
-        const response = await fetch(`http://localhost:3000/api/requests/update/${requestId}`, {
+        const response = await fetch(`/api/requests/update/${requestId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -378,5 +378,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial fetch
-    fetchRequests(`http://localhost:3000/api/requests/details`);
+    fetchRequests(`/api/requests/details`);
 });
