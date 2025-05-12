@@ -34,7 +34,7 @@ function debounce(func, wait) {
 
 async function fetchUsers() {
     try {
-        const response = await fetch(`http://localhost:3000/api/users/allUsers/${id}`);
+        const response = await fetch(`/api/users/allUsers/${id}`);
         if (!response.ok) throw new Error('Failed to fetch users');
         const data = await response.json();
         users = data.map((user, index) => ({
