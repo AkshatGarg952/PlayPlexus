@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayPLexus - Find Requests</title>
+    <link rel="stylesheet" href="/css/Request.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navbar -->
+    <nav class="top-navbar">
+        <div class="logo">
+            <i class="fa-solid fa-gamepad logo-icon"></i>
+            <span>PlayPLexus</span>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        
+        <!-- Nav Links (will collapse on mobile) -->
+        <div class="nav-links" id="navLinks">
+            <% if(user) { %>
+                <a href="/allNewRequests/<%= user._id %>/null" class="nav-link"><i class="fa-solid fa-bell"></i> <span class="link-text">New Requests</span></a>
+            <%} else if(team) { %>
+                <a href="/allNewRequests/null/<%= team._id %>" class="nav-link"><i class="fa-solid fa-bell"></i> <span class="link-text">New Requests</span></a>
+            <% } %>
+            <% if (user) { %>
+                <a href="/LandPage/<%= user._id %>" class="nav-link">
+                    <i class="fa-solid fa-house"></i> <span class="link-text">Back to Landing</span>
+                </a>
+            <% } else if (team) { %>
+                <a href="/LandPage/<%= team._id %>" class="nav-link">
+                    <i class="fa-solid fa-house"></i> <span class="link-text">Back to Landing</span>
+                </a>
+            <% } %>
+            <a href="/logout" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> <span class="link-text">Logout</span></a>
+        </div>
+    </nav>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <div class="avatar">
+
+                        <% if(user){ %>
+                            <img src="<%= user.profileImage %>" alt="<%= user.name %>">
+                            <% } else if(team){ %>
+
+                            <img src="<%= team.logo %>" alt="<%= team.name %>">
+                            <% } %>   
+                    </div>
+                    <div class="user-info">
+                        <% if(user){ %>
+                        <h3><%= user.name %></h3>
+                        <p><%= user.username %></p>
+                        <% } else if(team){ %>
+
+                            <h3><%= team.name %></h3>
+                            <p><%= team.leader %></p>
+                            <% } %>       
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+
+                     <li>
+                        <% if(user) { %>
+                            <a href="/mainPage/user/<%= user.username%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">Dashboard</span></a>
+                        <%} else if(team) { %>
+                            <a href="/mainPage/team/null/<%= team.email%>"><i class="fa-solid fa-users"></i> <span class="menu-text">Dashboard</span></a>
+                        <% }%>
+                    </li>
+
+                    
+                    <li>
+                        <% if(user) { %>
+                            <a href="/allPlayers/<%= user._id%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">All Players</span></a>
+                        <%} else if(team) { %>
+                            <a href="/allPlayers/null/<%= team._id%>"><i class="fa-solid fa-users"></i> <span class="menu-text">All Players</span></a>
+                        <% }%>
+                    </li>
+                    <li>
+                        <% if(user) { %>
+                            <a href="/allTeams/<%= user._id%>/null"><i class="fa-solid fa-trophy"></i> <span class="menu-text">All Teams</span></a>
+                        <%} else if(team) { %>
+                            <a href="/allTeams/null/<%= team._id%>"><i class="fa-solid fa-trophy"></i> <span class="menu-text">All Teams</span></a>
+                        <% } %>
+                    </li>
+                    <li class="active">
+                        <% if(user) { %>
+                            <a href="/allrequests/<%= user._id %>"><i class="fa-solid fa-inbox"></i> <span class="menu-text">All Requests</span></a>
+                        <%} else if(team) { %>
+                            <a href="/allrequests/<%= team._id %>"><i class="fa-solid fa-inbox"></i> <span class="menu-text">All Requests</span></a>
+                        <% } %>
+                    </li>
+                    <li>
+                        <% if(user) { %>
+                            <a href = "/profile/<%= user._id %>/null">  <i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                        <%} else if(team) { %>
+                            <a href= "/profile/null/<%= team._id %>"><i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                        <% } %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Find <span class="highlight">Requests</span></h1>
+                <span class="filter-item">
+                    
+                        <select id="sportFilter">
+                            <option value="">All Requests</option>
+                            <option value="All Sended">All Sended Requests</option>
+                            <option value="All Received">All Received Requests</option>
+                   </select>
+                </span>
+            </div>
+
+            <!-- Users Container (Now for Requests) -->
+            <div class="users-container" id="usersContainer">
+                <!-- Requests will be added here dynamically -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Finding requests...</p>
+                </div>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="load-more-container">
+                <button id="loadMoreBtn" class="load-more-btn">
+                    <i class="fa-solid fa-spinner"></i> Load More Requests
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Request Details Modal -->
+    <div class="modal" id="requestDetailsModal">
+        <div class="modal-overlay" id="requestDetailsModalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-close" id="requestDetailsModalClose">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="request-detail" id="requestDetail">
+                <!-- Request details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div class="toast" id="successToast">
+        <div class="toast-icon success">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="toast-content">
+            <p class="toast-message">Request sent successfully!</p>
+        </div>
+        <div class="toast-close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+    </div>
+
+    <script>  
+        window.userObj = <%- JSON.stringify(user || {}) %>;
+     window.teamObj = <%- JSON.stringify(team || {}) %>;
+     </script> 
+    <script src="/js/Request.js"></script>
+</body>
+</html>

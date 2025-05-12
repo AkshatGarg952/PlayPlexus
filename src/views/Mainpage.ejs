@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayPLexus - Main Dashboard</title>
+    <link rel="stylesheet" href="/css/Mainpage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+   <!-- Top Navbar -->
+   <nav class="top-navbar">
+    <div class="logo">
+        <i class="fa-solid fa-gamepad logo-icon"></i>
+        <span>PlayPLexus</span>
+    </div>
+    
+    <!-- Mobile Menu Toggle -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    
+    <!-- Nav Links (will collapse on mobile) -->
+    <div class="nav-links" id="navLinks">
+        <% if(user) { %>
+            <a href="/allNewRequests/<%= user._id %>/null" class="nav-link"><i class="fa-solid fa-bell"></i> <span class="link-text">New Requests</span></a>
+        <%} else if(team) { %>
+            <a href="/allNewRequests/null/<%= team._id %>" class="nav-link"><i class="fa-solid fa-bell"></i> <span class="link-text">New Requests</span></a>
+        <% } %>
+        
+        <% if (user) { %>
+            <a href="/LandPage/<%= user._id %>" class="nav-link">
+                <i class="fa-solid fa-house"></i> <span class="link-text">Back to Landing</span>
+            </a>
+        <% } else if (team) { %>
+            <a href="/LandPage/<%= team._id %>" class="nav-link">
+                <i class="fa-solid fa-house"></i> <span class="link-text">Back to Landing</span>
+            </a>
+        <% } %>
+        
+                    
+        <a href="/logout" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> <span class="link-text">Logout</span></a>
+    </div>
+   </nav>
+
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <div class="avatar">
+
+                        <% if(user){ %>
+                            <img src="<%= user.profileImage %>" alt="<%= user.name %>">
+                            <% } else if(team){ %>
+
+                            <img src="<%= team.logo %>" alt="<%= team.name %>">
+                            <% } %>   
+                    </div>
+                    <div class="user-info">
+                        <% if(user){ %>
+                        <h3><%= user.name %></h3>
+                        <p><%= user.username %></p>
+                        <% } else if(team){ %>
+
+                            <h3><%= team.name %></h3>
+                            <p><%= team.leader %></p>
+                            <% } %>
+
+                        
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li>
+                        <% if(user) { %>
+                            <a href="/allPlayers/<%= user._id%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">All Players</span></a>
+                        <%} else if(team) { %>
+                            <a href="/allPlayers/null/<%= team._id%>"><i class="fa-solid fa-users"></i> <span class="menu-text">All Players</span></a>
+                        <% }%>
+
+                        
+                    </li>
+                    <li>
+
+                        <% if(user) { %>
+                            <a href="/allTeams/<%= user._id%>/null"><i class="fa-solid fa-trophy"></i> <span class="menu-text">All Teams</span></a>
+                        <%} else if(team) { %>
+                            <a href="/allTeams/null/<%= team._id%>"><i class="fa-solid fa-trophy"></i> <span class="menu-text">All Teams</span></a>
+                        <% } %>
+                        
+                    </li>
+                    <li>
+                        <% if(user) { %>
+                            <a href="/allRequests/<%= user._id %>/null"><i class="fa-solid fa-inbox"></i> <span class="menu-text">All Requests</span></a>
+                        <%} else if(team) { %>
+                            <a href="/allRequests/null/<%= team._id %>"><i class="fa-solid fa-inbox"></i> <span class="menu-text">All Requests</span></a>
+                        <% } %>
+
+                    </li>
+                    <li>
+                        <% if(user) { %>
+                            <a href = "/profile/<%= user._id %>/null">  <i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                        <%} else if(team) { %>
+                            <a href= "/profile/null/<%= team._id %>"><i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                        <% } %>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="welcome-section">
+                
+
+                <% if(user){ %>
+                    <h1>Welcome back, <span class="username"><%= user.username %>!</span></h1>
+                    <% } else if(team) {%>
+
+                        <h1>Welcome back, <span class="username"><%= team.name %>!</span></h1>
+                        <% } %>
+               
+                <p>Your gaming adventure continues here.</p>
+            </div>
+
+            <!-- 3D Animation Container -->
+            <div class="animation-container">
+                <div class="cube-scene" id="cubeScene">
+                    <!-- Cubes will be generated here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Quick Action Cards -->
+            <div class="action-cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <h3>Post a Request</h3>
+                    <p>Find players and teams for your next game</p>
+                    <button class="card-btn">Create Now</button>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h3>AI Chatbot</h3>
+                    <p>Get help finding matches and players</p>
+                    <button class="card-btn">Try Now</button>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-calendar"></i>
+                    </div>
+                    <h3>Schedule Games</h3>
+                    <p>Plan your next gaming session</p>
+                    <button class="card-btn">Schedule</button>
+                </div>
+            </div>
+
+            <!-- Recent Activity Section -->
+            <div class="recent-activity">
+                <h2>Recent Activity</h2>
+                <div class="activity-cards">
+                    <div class="activity-card">
+                        <div class="activity-icon notification">
+                            <i class="fa-solid fa-user-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>New Player Request</h4>
+                            <p>TeamCrusher42 wants to join your team</p>
+                            <span class="activity-time">10 minutes ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon match">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Match Completed</h4>
+                            <p>Your team vs Shadow Strikers</p>
+                            <span class="activity-time">Yesterday</span>
+                        </div>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon achievement">
+                            <i class="fa-solid fa-medal"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Achievement Unlocked</h4>
+                            <p>Team Player: Joined 5 tournaments</p>
+                            <span class="activity-time">3 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Floating AI Chatbot Button -->
+    <div class="chatbot-button">
+        <i class="fa-solid fa-robot"></i>
+    </div>
+
+    <script src="/js/Mainpage.js"></script>
+</body>
+</html>

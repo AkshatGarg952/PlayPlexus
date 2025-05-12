@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayPlexus - Your Playground. Your Team. Anytime.</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="/css/Landpage.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <i class="fas fa-gamepad"></i>Play<span>PLexus</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">Working</a></li>
+
+                
+            <% if(team || user) { %>
+                <li><a href="/logout" class="register-btn team-logout">Logout</a></li>
+
+                <% }  else {%>
+
+                <li><a href="#" class="register-btn">Register</a></li>
+                
+                <li><a href="#" class="login-btn">Login</a></li>
+           
+                <% } %>
+                <li><a href="#reviews">About</a></li>
+
+
+            <% if(user){ %>
+                <li><a href='/mainPage/user/<%= user%>/false' class="app-btn">Go to App</a></li>
+            <% } else if(team){ %>
+                <li><a href="/mainPage/team/false/<%= team%>" class="app-btn">Go to App</a></li>
+            <% } else { %>
+            
+                <li><a class="app-btn register-btn">Go to App</a></li>
+          <% } %>
+        </ul>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="particles"></div>
+        <div class="hero-content">
+            <div class="hero-animation">
+                <div class="animation-container">
+                    <div class="cube">
+                        <div class="cube-face"><i class="fas fa-gamepad"></i></div>
+                        <div class="cube-face"><i class="fas fa-futbol"></i></div>
+                        <div class="cube-face"><i class="fas fa-users"></i></div>
+                        <div class="cube-face"><i class="fas fa-trophy"></i></div>
+                        <div class="cube-face"><i class="fas fa-comments"></i></div>
+                        <div class="cube-face"><i class="fas fa-map-marker-alt"></i></div>
+                    </div>
+                </div>
+            </div>
+            <h1 class="animate__animated animate__fadeInUp">Your Playground. Your Team. Anytime.</h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">Find players, form teams, and compete in both online and offline games. Connect with gamers and sports enthusiasts in your area.</p>
+            <div class="hero-btns animate__animated animate__fadeInUp animate__delay-2s">
+                
+                <% if(user){ %>
+                   <a href='/mainPage/user/<%= user%>/false' style="text-decoration: none;" class="hero-btn primary-btn register-btn">Get Started</a>
+                <% } else if(team){ %>
+                    <a href="/mainPage/team/false/<%= team%>"style="text-decoration: none;" class="hero-btn primary-btn register-btn">Get Started</a>
+                <% } else { %>
+                
+                   <a href="#" class="hero-btn primary-btn register-btn" style="text-decoration: none;">Get Started</a>
+              <% } %>
+                
+                <button class="hero-btn secondary-btn">Try AI Chatbot</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Amazing Features</h2>
+            <p>Discover what makes PlayPLexus the ultimate platform for finding players and teams</p>
+        </div>
+        <div class="features-container">
+            <div class="feature-card">
+                <i class="fas fa-search feature-icon"></i>
+                <h3>Find Players Nearby</h3>
+                <p>Discover gaming buddies and sports teammates in your vicinity with our advanced location-based matching system.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-robot feature-icon"></i>
+                <h3>AI-Powered Chatbot Help</h3>
+                <p>Get instant assistance, game recommendations, and team formations with our intelligent AI assistant.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-globe feature-icon"></i>
+                <h3>Online & Offline Games</h3>
+                <p>Whether you're looking for digital gaming partners or real-world sports teams, we've got you covered.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-trophy feature-icon"></i>
+                <h3>Challenge Teams Nearby</h3>
+                <p>Find and challenge other teams in your area for friendly matches or competitive tournaments.</p>
+            </div>
+            <div class="feature-card">
+                <i class="far fa-calendar-alt feature-icon"></i>
+                <h3>Schedule Friendly Matches</h3>
+                <p>Organize games with ease using our intuitive scheduling system and keep track of all your upcoming events.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-language feature-icon"></i>
+                <h3>Multi-language & Voice Support</h3>
+                <p>Break language barriers with our built-in translation and voice recognition features.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Getting started with PlayPLexus is quick and simple. Follow these easy steps</p>
+        </div>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <i class="fas fa-user-plus step-icon"></i>
+                <h3>Register/Login</h3>
+                <p>Create your account in seconds and set up your gaming profile</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <i class="fas fa-gamepad step-icon"></i>
+                <h3>Choose Sport/Game</h3>
+                <p>Select from hundreds of games and sports available on the platform</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <i class="fas fa-search step-icon"></i>
+                <h3>Find Players/Teams</h3>
+                <p>Discover players and teams that match your preferences and skill level</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <i class="fas fa-robot step-icon"></i>
+                <h3>Use AI Chatbot</h3>
+                <p>Get assistance from our intelligent AI to optimize your gaming experience</p>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <i class="fas fa-handshake step-icon"></i>
+                <h3>Schedule & Play</h3>
+                <p>Set up matches, meet new friends, and enjoy your favorite activities</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="section-title">
+            <h2>What Our Users Say</h2>
+            <p>Join thousands of satisfied players who have found their perfect team</p>
+        </div>
+        <div class="reviews-container">
+            <div class="reviews-slider">
+                <div class="review-slide">
+                    <div class="review-cards">
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="reviewer-img">
+    <img src="http://localhost:3000/profileImages/pic1.jpg" alt="User Avatar">
+</div>
+
+                                <div class="reviewer-info">
+                                    <h4>Alex Johnson</h4>
+                                    <p>Football Enthusiast</p>
+                                </div>
+                            </div>
+                            <p class="review-text">"Found a weekend cricket squad within 10 mins! The app made it super easy to connect with players of my skill level."</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="reviewer-img">
+                                    <img src="http://localhost:3000/profileImages/pic2.jpg" alt="User Avatar">
+                                </div>
+                                <div class="reviewer-info">
+                                    <h4>Sarah Kim</h4>
+                                    <p>E-Sports Player</p>
+                                </div>
+                            </div>
+                            <p class="review-text">"The AI chatbot helped me form the perfect Valorant team. We've been playing together for months now and even entered tournaments!"</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-slide">
+                    <div class="review-cards">
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="reviewer-img">
+                                    <img src="http://localhost:3000/profileImages/pic3.jpg" alt="User Avatar">
+                                </div>
+                                <div class="reviewer-info">
+                                    <h4>Michael Torres</h4>
+                                    <p>Basketball Player</p>
+                                </div>
+                            </div>
+                            <p class="review-text">"I moved to a new city and was looking for a basketball team. Within a week, I had regular games scheduled with an awesome group!"</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="reviewer-img">
+                                    <img src="http://localhost:3000/profileImages/pic4.jpg" alt="User Avatar">
+                                </div>
+                                <div class="reviewer-info">
+                                    <h4>Emma Wilson</h4>
+                                    <p>Team Manager</p>
+                                </div>
+                            </div>
+                            <p class="review-text">"As a team manager, this app has been invaluable for finding players and scheduling matches. The interface is intuitive and feature-rich."</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-slide">
+                    <div class="review-cards">
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="reviewer-img">
+                                    <img src="http://localhost:3000/profileImages/pic5.jpg" alt="User Avatar">
+                                </div>
+                                <div class="reviewer-info">
+                                    <h4>David Chen</h4>
+                                    <p>Chess Player</p>
+                                </div>
+                            </div>
+                            <p class="review-text">"The multi-language support is fantastic! I've played chess with people from around the world without any communication barriers."</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <div class="reviewer-img">
+                                    <img src="http://localhost:3000/profileImages/pic6.jpg" alt="User Avatar">
+                                </div>
+                                <div class="reviewer-info">
+                                    <h4>Olivia Martinez</h4>
+                                    <p>Tennis Enthusiast</p>
+                                </div>
+                            </div>
+                            <p class="review-text">"Finding tennis partners used to be such a hassle. Now I just open the app and within minutes I've got a match scheduled for the weekend!"</p>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <div class="slider-dot active" data-slide="0"></div>
+                <div class="slider-dot" data-slide="1"></div>
+                <div class="slider-dot" data-slide="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <a href="#"><i class="fas fa-gamepad"></i>Play<span>PLexus</span></a>
+                <p>Connect, play, and compete with players and teams around the world.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Feedback</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Community Guidelines</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Built for gamers & players. <span>PlayPLexus 🏆</span> © 2025. All rights reserved.</p>
+        </div>
+    </footer>
+
+<!-- Auth Modals -->
+<div class="modal-overlay" id="authModal">
+    <!-- Select Login/Register Type Modal -->
+    <div class="auth-select-modal" id="authSelectModal">
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+        <h2 class="auth-modal-title">Choose Account Type</h2>
+        <div class="auth-options">
+            <div class="auth-option" data-type="player">
+                <i class="fas fa-user"></i>
+                <h4>Player</h4>
+            </div>
+            <div class="auth-option" data-type="team">
+                <i class="fas fa-users"></i>
+                <h4>Team</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Registration Player Form Modal -->
+
+    <div class="auth-form-modal" id="registerPlayerModal">
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+        <h2 class="auth-modal-title">Register as Player</h2>
+      
+        <form class="auth-form" id="playerRegisterForm" action="/api/users/register" method="POST" enctype="multipart/form-data">
+          <!-- Profile Image -->
+          <div class="form-group">
+    <label for="profileImage">Profile Image</label>
+    <div class="image-preview" id="playerProfileImagePreview">
+        <i class="fas fa-user-circle"></i>
+    </div>
+    <input type="file" id="profileImage" name="profileImage" class="form-input file-input" accept="image/*">
+    <label for="profileImage"><i class="fas fa-upload"></i> Choose image</label>
+</div>
+      
+          <!-- Name -->
+          <div class="form-group">
+            <label for="name">Full Name *</label>
+            <input type="text" id="name" name="name" class="form-input" required minlength="3" maxlength="50">
+          </div>
+      
+          <!-- Username -->
+          <div class="form-group">
+            <label for="username">Username *</label>
+            <input type="text" id="username" name="username" class="form-input" required minlength="3" maxlength="50">
+          </div>
+      
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" class="form-input" required pattern="^\S+@\S+\.\S+$">
+          </div>
+      
+          <!-- Location -->
+          <div class="form-group">
+            <label for="location">Location *</label>
+            <input type="text" id="location" name="location" class="form-input" required minlength="3" maxlength="50">
+          </div>
+      
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="phone">Phone *</label>
+            <input type="tel" id="phone" name="phone" class="form-input" required>
+          </div>
+      
+          <!-- Bio -->
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea id="bio" name="bio" class="form-input" placeholder="Tell us about yourself"></textarea>
+          </div>
+      
+          <!-- Sports -->
+          <div class="form-group">
+            <label for="sports">Sports</label>
+            <input type="text" id="sports" name="sports" class="form-input" placeholder="e.g., football, basketball">
+            <small class="form-hint">Separate with commas</small>
+          </div>
+
+
+          <!-- Online Games -->
+          <div class="form-group">
+            <label for="onlineGames">Online Games</label>
+            <input type="text" id="onlineGames" name="onlineGames" class="form-input" placeholder="e.g., BGMI, Valorant">
+            <small class="form-hint">Separate with commas</small>
+          </div>
+      
+          <input type="hidden" name="onlineGamesJSON" id="onlineGamesJSON">
+      
+          <!-- Password -->
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input type="password" id="password" name="password" class="form-input" required minlength="6">
+          </div>
+      
+          <button type="submit" class="form-submit">Register</button>
+        </form>
+      
+        <div class="auth-footer">
+          Already have an account? <a href="#" class="switch-to-login">Login here</a>
+        </div>
+      </div>
+      
+      
+
+    <!-- Registration Team Form Modal -->
+    <div class="auth-form-modal" id="registerTeamModal">
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+        <h2 class="auth-modal-title">Register as Team</h2>
+        <form class="auth-form" id="teamRegisterForm" action="/api/teams/register" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+    <label for="teamLogo">Team Logo</label>
+    <div class="image-preview" id="teamLogoPreview">
+        <i class="fas fa-users"></i>
+    </div>
+    <input type="file" id="teamLogo" name="logo" class="form-input file-input" accept="image/*">
+    <label for="teamLogo"><i class="fas fa-upload"></i> Choose logo</label>
+</div>
+            <div class="form-group">
+                <label for="teamName">Team Name <span class="required">*</span></label>
+                <input type="text" id="teamName" name="name" class="form-input" placeholder="Enter team name" required minlength="3" maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="teamLeader">Leader Name <span class="required">*</span></label>
+                <input type="text" id="teamLeader" name="leader" class="form-input" placeholder="Enter leader name" required minlength="3" maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="teamEmail">Email Address <span class="required">*</span></label>
+                <input type="email" id="teamEmail" name="email" class="form-input" placeholder="Enter team email" required pattern="^\S+@\S+\.\S+$">
+            </div>
+            <div class="form-group">
+                <label for="teamLocation">Location <span class="required">*</span></label>
+                <input type="text" id="teamLocation" name="location" class="form-input" placeholder="Enter team location" required minlength="3" maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="teamPhone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="teamPhone" name="phone" class="form-input" placeholder="Enter team phone number" required>
+            </div>
+            <div class="form-group">
+                <label for="teamBio">Bio</label>
+                <textarea id="teamBio" name="bio" class="form-input" placeholder="Tell us about your team"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="teamSports">Sports</label>
+                <input type="text" id="teamSports" name="sports" class="form-input" placeholder="Enter sports (e.g., football, basketball)">
+                <small class="form-hint">Separate sports with commas</small>
+            </div>
+            <!-- Online Games -->
+          <div class="form-group">
+            <label for="onlineGames">Online Games</label>
+            <input type="text" id="onlineGames" name="onlineGames" class="form-input" placeholder="e.g., BGMI, Valorant">
+            <small class="form-hint">Separate with commas</small>
+          </div>
+            <div class="form-group">
+                <label for="teamPassword">Password <span class="required">*</span></label>
+                <input type="password" id="teamPassword" name="password" class="form-input" placeholder="Create a password" required minlength="6">
+            </div>
+            <button type="submit" class="form-submit">Register Team</button>
+        </form>
+        <div class="auth-footer">
+            Already have a team account? <a href="#" class="switch-to-login">Login here</a>
+        </div>
+    </div>
+
+    <!-- Login Player Form Modal -->
+    <div class="auth-form-modal" id="loginPlayerModal">
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+        <h2 class="auth-modal-title">Login as Player</h2>
+        <form class="auth-form" action="/api/users/login" method="POST">
+            <div class="form-group">
+                <label for="loginPlayerEmail">Email Address</label>
+                <input type="email" id="loginPlayerEmail" name="email" class="form-input" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="loginPlayerPassword">Password</label>
+                <input type="password" id="loginPlayerPassword" name="password" class="form-input" placeholder="Enter your password">
+            </div>
+            <button type="submit" class="form-submit">Login</button>
+        </form>
+        <div class="auth-footer">
+            Don't have an account? <a href="#" class="switch-to-register">Register here</a>
+        </div>
+    </div>
+
+    <!-- Login Team Form Modal -->
+    <div class="auth-form-modal" id="loginTeamModal">
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+        <h2 class="auth-modal-title">Login as Team</h2>
+        <form class="auth-form" action="/api/teams/login" method="POST">
+            <div class="form-group">
+                <label for="loginTeamEmail">Email Address</label>
+                <input type="email" id="loginTeamEmail" name="email" class="form-input" placeholder="Enter team email">
+            </div>
+            <div class="form-group">
+                <label for="loginTeamPassword">Password</label>
+                <input type="password" id="loginTeamPassword" name="password" class="form-input" placeholder="Enter team password">
+            </div>
+            <button type="submit" class="form-submit">Login</button>
+        </form>
+        <div class="auth-footer">
+            Don't have a team account? <a href="#" class="switch-to-register">Register here</a>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+</script>
+    <script src="/js/Landpage.js"> </script>
+</body>
+</html>

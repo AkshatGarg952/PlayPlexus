@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayPLexus - Chat</title>
+    <link rel="stylesheet" href="/css/Chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navbar (unchanged) -->
+    <nav class="top-navbar">
+        <div class="logo">
+            <i class="fa-solid fa-gamepad logo-icon"></i>
+            <span>PlayPLexus</span>
+        </div>
+        
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        
+        <div class="nav-links" id="navLinks">
+            <a href="#" class="nav-link"><i class="fa-solid fa-bell"></i> <span class="link-text">New Requests</span></a>
+            <% if(sender.username){ %>
+                <a href="/<%= sender.username%>/null" class="nav-link"><i class="fa-solid fa-house"></i> <span class="link-text">Back to Landing</span></a>
+                <%} else if(sender.leader){%>
+                    <a href="/null/<%= sender.email %>" class="nav-link"><i class="fa-solid fa-house"></i> <span class="link-text">Back to Landing</span></a>
+                    <% } else { %>
+                        <a href="/" class="nav-link"><i class="fa-solid fa-house"></i> <span class="link-text">Back to Landing</span></a>
+                        <% } %>
+            
+            <a href="/logout" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> <span class="link-text">Logout</span></a>
+        </div>
+    </nav>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Sidebar (unchanged) -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <div class="avatar">
+
+                        <% if(sender.username){ %>
+                            <img src="<%= sender.profileImage %>" alt="<%= sender.name %>">
+                            <% } %>
+
+                        <% if(sender.leader){ %>
+                            <img src="<%= sender.logo %>" alt="<%= sender.name %>">
+                            <% } %>   
+                    </div>
+                    <div class="user-info">
+                        <% if(sender.username){ %>
+                        <h3><%= sender.name %></h3>
+                        <p><%= sender.username %></p>
+                        <% } %>
+
+                        <% if(sender.leader){ %>
+                            <h3><%= sender.name %></h3>
+                            <p><%= sender.leader %></p>
+                            <% } %>
+
+                        
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+
+                     <li>
+                        <% if(sender.username) { %>
+                            <a href="/mainPage/user/<%= sender.username%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">Dashboard</span></a>
+                        <%} else{ %>
+                            <a href="/mainPage/team/null/<%= sender.email%>"><i class="fa-solid fa-users"></i> <span class="menu-text">Dashboard</span></a>
+                        <% }%>
+                    </li>
+
+                    <li>
+                        <% if(sender.username) { %>
+                            <a href="/allPlayers/<%= sender._id%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">All Players</span></a>
+                        <%} else { %>
+                            <a href="/allPlayers/null/<%= sender._id%>"><i class="fa-solid fa-users"></i> <span class="menu-text">All Players</span></a>
+                        <% } %>
+                        
+                    </li>
+                    <li>
+
+                        <% if(sender.username) { %>
+                            <a href="/allTeams/<%= sender._id%>/null"><i class="fa-solid fa-trophy"></i> <span class="menu-text">All Teams</span></a>
+                        <%} else { %>
+                            <a href="/allTeams/null/<%= sender._id%>"><i class="fa-solid fa-trophy"></i> <span class="menu-text">All Teams</span></a>
+                        <% } %>
+                        
+                    </li>
+                    <li>
+                        <% if(sender.username) { %>
+                            <a href="/allrequests/<%= sender._id %>/null"><i class="fa-solid fa-inbox"></i> <span class="menu-text">All Requests</span></a>
+                        <%} else { %>
+                            <a href="/allrequests/null/<%= sender._id %>"><i class="fa-solid fa-inbox"></i> <span class="menu-text">All Requests</span></a>
+                        <% } %>
+
+                    </li>
+                    <li>
+                        <% if(sender.username) { %>
+                            <a href = "/profile/<%= sender._id %>/null"> <i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                        <%} else { %>
+                            <a href= "/profile/null/<%= sender._id %>"><i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                        <% } %>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content (replaced with chat application) -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Chat with <span class="highlight">Players</span></h1>
+            </div>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-user">
+                        <div class="user-avatar">
+                            <% if(receiver.username){ %>
+                                <img src="<%= receiver.profileImage %>" alt="<%= receiver.username %>">
+                            <% } else { %>
+                                <img src="<%= receiver.logo %>" alt="<%= receiver.name %>">
+                            <% } %>
+                            
+                        </div>
+                        <% if(receiver.username){ %>
+                            <span><%= receiver.username %> </span>
+                        <% } else { %>
+                            <span><%= receiver.leader %> </span>
+                            <% } %>
+                        
+                    </div>
+                    <div class="chat-user">
+                        <div class="user-avatar">
+                            <% if(sender.username){ %>
+                                <img src="<%= sender.profileImage %>" alt="<%= sender.username %>">
+                            <% } else { %>
+                                <img src="<%= sender.logo %>" alt="<%= sender.name %>">
+                                <% } %>
+                            
+                        </div>
+                        <% if(sender.username){ %>
+                            <span><%= sender.username %> (You) </span>
+                        <% } else { %>
+                            <span><%= sender.leader %> (You) </span>
+                            <% } %>
+                        
+                    </div>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <% if (messages && messages.length > 0) { %>
+                        <% messages.forEach(message => { %>
+                            <div class="message <%= message.senderId.toString() === sender._id.toString() ? 'sent' : 'received' %>">
+                                <p><%= message.message %></p>
+                                <span class="timestamp"><%= new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %></span>
+                            </div>
+                        <% }); %>
+                    <% } %>
+                    
+                </div>
+                <form class="chat-input-form" id="chatForm">
+                    <input type="text" id="chatInput" placeholder="Type your message..." required>
+                    <button type="submit" class="btn-submit">
+                        <i class="fa-solid fa-paper-plane"></i> Send
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- User Profile Modal (unchanged) -->
+    <div class="modal" id="profileModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-close" id="modalClose">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="profile-detail" id="profileDetail">
+                <!-- Profile details will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Request Form Modal (unchanged) -->
+    <!-- <div class="modal" id="requestModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content request-modal-content">
+            <div class="modal-close" id="requestModalClose">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="request-form-container">
+                <h2>Send Game Request</h2>
+                <form id="requestForm">
+                    <input type="hidden" id="requestUserId" name="userId">
+                    <div class="form-group">
+                        <label for="requestType">Activity Type</label>
+                        <div class="toggle-container">
+                            <div class="toggle-option active" data-value="sport" id="sportToggle">Sport</div>
+                            <div class="toggle-option" data-value="game" id="gameToggle">Online Game</div>
+                        </div>
+                        <input type="hidden" id="requestType" name="requestType" value="sport">
+                    </div>
+                    <div class="form-group" id="sportSelectGroup">
+                        <label for="sportSelect">Select Sport</label>
+                        <select id="sportSelect" name="sport" required>
+                            <option value="">Choose a sport</option>
+                        </select>
+                    </div>
+                    <div class="form-group hidden" id="gameSelectGroup">
+                        <label for="gameSelect">Select Game</label>
+                        <select id="gameSelect" name="game">
+                            <option value="">Choose a game</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="venueGroup">
+                        <label for="venue">Venue</label>
+                        <input type="text" id="venue" name="venue" placeholder="Enter venue location" required>
+                    </div>
+                    <div class="form-group hidden" id="platformGroup">
+                        <label for="platform">Platform</label>
+                        <select id="platform" name="platform">
+                            <option value="">Select platform</option>
+                            <option value="pc">PC</option>
+                            <option value="playstation">PlayStation</option>
+                            <option value="xbox">Xbox</option>
+                            <option value="mobile">Mobile</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateTime">Date & Time</label>
+                        <input type="datetime-local" id="dateTime" name="dateTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Add a personal message..." rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="cancelRequest">Cancel</button>
+                        <button type="submit" class="btn-submit">Send Request</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
+
+   
+
+    <!-- Success Toast (unchanged) -->
+    <div class="toast" id="successToast">
+        <div class="toast-icon success">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div class="toast-content">
+            <p class="toast-message">Message sent successfully!</p>
+        </div>
+        <div class="toast-close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+    </div>
+
+    <script src="/js/Chat.js"></script>
+    <script>  
+     window.senderObj = <%- JSON.stringify(sender || {}) %>;
+     window.receiverObj = <%- JSON.stringify(receiver || {}) %>;
+     </script> 
+
+<!-- Replace the Socket.IO script section in your Chat.ejs file -->
+
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM fully loaded and parsed');
+        console.log('Socket.IO script loaded');
+        
+        const senderId = window.senderObj?._id;
+        const receiverId = window.receiverObj?._id;
+
+        console.log('Sender ID:', senderId);
+        console.log('Receiver ID:', receiverId);
+        
+        if (!senderId || !receiverId) {
+            console.error('Sender or Receiver ID is missing');
+            alert('Cannot connect to chat: Invalid user data');
+            return;
+        }
+
+        // Connect to Socket.IO on the current host automatically
+        const socket = io({
+            transports: ['websocket', 'polling']
+        });
+        
+        console.log('Attempting Socket.IO connection');
+
+        const roomId = [senderId, receiverId].sort().join('_');
+        console.log('Room ID:', roomId);
+
+        socket.on('connect', () => {
+            console.log('Connected to Socket.IO server with ID:', socket.id);
+            socket.emit('joinRoom', roomId);
+            console.log('Emitted joinRoom:', roomId);
+        });
+
+        socket.on('connect_error', (error) => {
+            console.error('Socket.IO connection error:', error);
+            alert('Failed to connect to chat server: ' + error.message);
+        });
+
+        const chatMessages = document.getElementById('chatMessages');
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const message = chatInput.value.trim();
+            if (message) {
+                console.log('Sending message:', message);
+                socket.emit('sendMessage', message, senderId, receiverId, roomId);
+                const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message sent';
+                messageDiv.innerHTML = `<p>${message}</p><span class="timestamp">${timestamp}</span>`;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatInput.value = '';
+            }
+        });
+
+        socket.on('receiveMessage', (m) => {
+            console.log('Received message:', m);
+            if (m.senderId !== senderId) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message received';
+                messageDiv.innerHTML = `<p>${m.message}</p><span class="timestamp">${new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        });
+        
+
+        socket.on('error', (error) => {
+            console.error('Socket.IO error:', error);
+            alert('Chat error: ' + error.message);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayPLexus - Find Teams</title>
+    <link rel="stylesheet" href="/css/Profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navbar -->
+    <nav class="top-navbar">
+        <div class="logo">
+            <i class="fa-solid fa-gamepad logo-icon"></i>
+            <span>PlayPLexus</span>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        
+        <!-- Nav Links (will collapse on mobile) -->
+        <div class="nav-links" id="navLinks">
+            <% if(user) { %>
+                <a href="/allNewRequests/<%= user._id %>/null" class="nav-link"><i class="fa-solid fa-bell"></i> <span class="link-text">New Requests</span></a>
+            <%} else if(team) { %>
+                <a href="/allNewRequests/null/<%= team._id %>" class="nav-link"><i class="fa-solid fa-bell"></i> <span class="link-text">New Requests</span></a>
+            <% } %>
+            <% if (user) { %>
+                <a href="/LandPage/<%= user._id %>" class="nav-link">
+                    <i class="fa-solid fa-house"></i> <span class="link-text">Back to Landing</span>
+                </a>
+            <% } else if (team) { %>
+                <a href="/LandPage/<%= team._id %>" class="nav-link">
+                    <i class="fa-solid fa-house"></i> <span class="link-text">Back to Landing</span>
+                </a>
+            <% } %>
+            
+                        
+            <a href="/logout" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i> <span class="link-text">Logout</span></a>
+        </div>
+    </nav>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-toggle" id="sidebarToggle">
+                <i class="fa-solid fa-chevron-left"></i>
+            </div>
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <div class="avatar">
+                        <% if(user){ %>
+                            <img src="<%= user.profileImage %>" alt="<%= user.name %>">
+                            <% } else if(team){ %>
+
+                            <img src="<%= team.logo %>" alt="<%= team.name %>">
+                            <% } %>  
+                    </div>
+                    <div class="user-info">
+                        <% if(user){ %>
+                            <h3><%= user.name %></h3>
+                            <p><%= user.username %></p>
+                            <% } else if(team){ %>
+    
+                                <h3><%= team.name %></h3>
+                                <p><%= team.leader %></p>
+                                <% } %>
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+                     <li>
+                        <% if(user) { %>
+                            <a href="/mainPage/user/<%= user.username%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">Dashboard</span></a>
+                        <%} else if(team) { %>
+                            <a href="/mainPage/team/null/<%= team.email%>"><i class="fa-solid fa-users"></i> <span class="menu-text">Dashboard</span></a>
+                        <% }%>
+                    </li>
+
+                    
+                    <li>
+                        <% if(user) { %>
+                            <a href="/allPlayers/<%= user._id%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">All Players</span></a>
+                        <%} else if(team) { %>
+                            <a href="/allPlayers/null/<%= team._id%>"><i class="fa-solid fa-users"></i> <span class="menu-text">All Players</span></a>
+                        <% }%>
+                    </li>
+                    <li>
+                        <% if(user) { %>
+                            <a href="/allTeams/<%= user._id%>/null"><i class="fa-solid fa-trophy"></i> <span class="menu-text">All Teams</span></a>
+                        <%} else if(team) { %>
+                            <a href="/allTeams/null/<%= team._id%>"><i class="fa-solid fa-trophy"></i> <span class="menu-text">All Teams</span></a>
+                        <% } %>
+                    </li>
+                    <li>
+                        <% if(user) { %>
+                            <a href="/allRequests/<%= user._id %>/null"><i class="fa-solid fa-inbox"></i> <span class="menu-text">All Requests</span></a>
+                        <%} else if(team) { %>
+                            <a href="/allRequests/null/<%= team._id %>"><i class="fa-solid fa-inbox"></i> <span class="menu-text">All Requests</span></a>
+                        <% } %>
+
+                    </li>
+                    <li class="active">
+                        <% if(user) { %>
+                            <a href = "/profile/<%= user._id %>/null">  <i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                        <%} else if(team) { %>
+                            <a href= "/profile/null/<%= team._id %>"><i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                        <% } %>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <main class="main-content">
+    <div class="page-header">
+        <h1>Edit <span class="highlight">Profile</span></h1>
+    </div>
+    <div class="edit-profile-container">
+        <!-- Read-Only Profile Display -->
+        <div id="profileDisplay" class="profile-display">
+            <div class="profile-pic-section">
+                <div class="user-avatar">
+                    <% if(user) { %>
+                        <img src="<%= user.profileImage %>" alt="<%= user.username %>" id="displayProfilePic">
+                    <% } else { %>
+                        <img src="<%= team.logo %>" alt="<%= team.logo%>"  id="displayProfilePic">
+                    <% } %>
+                    
+                </div>
+            </div>
+            <div class="profile-info">
+                <% if(user){ %>
+                
+                    <div class="detail-item"><strong>Name:</strong> <span id="displayName"> <%= user.name %></span></div>
+                    <div class="detail-item"><strong>Username:</strong> <span id="displayUsername"> <%= user.username %></span></div>
+                    <div class="detail-item"><strong>Email:</strong> <span id="displayEmail"><%= user.email %></span></div>
+                    <div class="detail-item"><strong>Phone:</strong> <span id="displayPhone"><%= user.phone %></span></div>
+                    <div class="detail-item"><strong>Location:</strong> <span id="displayLocation"><%= user.location %></span></div>
+                    <div class="detail-item"><strong>Password:</strong> <span id="displayPassword"><%= user.password %></span></div>
+                    <div class="detail-item"><strong>Sports:</strong> <span id="displaySports"><%= user.sports %></span></div>
+                    <div class="detail-item"><strong>Online Games:</strong> <span id="displayOnlineGames"><%= user.onlineGames %></span></div>
+                    <div class="detail-item"><strong>Bio:</strong> <span id="displayBio"><%= user.bio %></span></div>
+                <% } else{ %>
+                    <div class="detail-item"><strong>Name:</strong> <span id="displayName"><%= team.name %></span></div>
+                    <div class="detail-item"><strong>Username:</strong> <span id="displayUsername"><%= team.leader %></span></div>
+                    <div class="detail-item"><strong>Email:</strong> <span id="displayEmail"><%= team.email %></span></div>
+                    <div class="detail-item"><strong>Phone:</strong> <span id="displayPhone"><%= team.phone %></span></div>
+                    <div class="detail-item"><strong>Location:</strong> <span id="displayLocation"><%= team.location %></span></div>
+                    <div class="detail-item"><strong>Password:</strong> <span id="displayPassword"><%= team.password %></span></div>
+                    <div class="detail-item"><strong>Sports:</strong> <span id="displaySports"><%= team.sports %></span></div>
+                    <div class="detail-item"><strong>Online Games:</strong> <span id="displayOnlineGames"><%= team.onlineGames %></span></div>
+                    <div class="detail-item"><strong>Bio:</strong> <span id="displayBio"><%= team.bio %></span></div>
+                <% } %>    
+                
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn-submit" id="editProfileButton">Update Profile</button>
+            </div>
+        </div>
+
+        <!-- Editable Profile Form (Hidden Initially) -->
+        <div id="editProfileSection" class="edit-profile-form hidden">
+            <% if(user) { %>
+                <form id="editProfileForm" action="/api/users/update/<%= user._id %>" method="POST">
+            <% } else { %>
+                <form id="editProfileForm" action="/api/teams/update/<%= team._id %>" method="POST">
+            <% } %>
+            
+                <div class="profile ас-section">
+                    <div class="user-avatar">
+                        <% if(user) { %>
+                            <img src="<= user.profileImage %>" alt="<%= user.username %>"  id="profilePicPreview">
+                        <% } else { %>
+                            <img src="<%= team.logo %>" alt="<%= team.logo %>"  id="profilePicPreview">
+                        <% } %>
+                       
+                    </div>
+                    <input type="file" name= "profileImage" id="profilePicInput" accept="image/*" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <% if(user) { %>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" value="<%= user.name %>" required>
+                        <% } else { %>
+                            <input type="text" id="name" name="name" placeholder="Enter your Team name" value="<%= team.name %>" required>
+                        <% } %>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <% if(user) { %>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" value="<%= user.username %>" required>
+                        <% } else { %>
+                            <input type="text" id="username" name="leader" placeholder="Enter your leader's name " value="<%= team.leader %>" required>
+                        <% } %>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <% if(user) { %>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" value="<%= user.email %>" required>
+                        <% } else { %>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" value="<%= team.email %>" required>
+                        <% } %>
+
+                    
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <% if(user) { %>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" value="<%= user.phone %>">
+                        <% } else { %>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" value="<%= team.phone %>">
+                        <% } %>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <% if(user) { %>
+                        <input type="text" id="location" name="location" placeholder="Enter your location" value="<%= user.location %>">
+                        <% } else { %>
+                            <input type="text" id="location" name="location" placeholder="Enter your location" value="<%= team.location %>">
+                        <% } %>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <% if(user) { %>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" value="<%= user.password %>">
+                        <% } else { %>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" value="<%= team.password %>">
+                        <% } %>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="sports">Sports (comma-separated)</label>
+                    <% if(user) { %>
+                        <input type="text" id="sports" name="sports" placeholder="e.g., Football, Basketball" value="<%= user.sports %>">
+                        <% } else { %>
+                            <input type="text" id="sports" name="sports" placeholder="e.g., Football, Basketball" value="<%= team.sports %>">
+                        <% } %>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="onlineGames">Online Games (comma-separated)</label>
+                    <% if(user) { %>
+                        <input type="text" id="onlineGames" name="onlineGames" placeholder="e.g., Fortnite, Valorant" value="<%= user.onlineGames %>">
+                        <% } else { %>
+                            <input type="text" id="onlineGames" name="onlineGames" placeholder="e.g., Fortnite, Valorant" value="<%= team.onlineGames %>">
+                        <% } %>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <% if(user) { %>
+                        <textarea id="bio" name="bio" placeholder="Tell us about yourself" rows="4"> <%= user.bio %></textarea>
+                        <% } else { %>
+                            <textarea id="bio" name="bio" placeholder="Tell us about yourself" rows="4"> <%= team.bio %> </textarea>
+                        <% } %>
+                    
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="cancelEdit">Cancel</button>
+                    <button type="submit" class="btn-submit">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+    </div>
+
+    <script src="/js/Profile.js"></script>
+</body>
+</html>
