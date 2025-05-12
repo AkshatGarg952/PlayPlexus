@@ -40,7 +40,7 @@ function debounce(func, wait) {
 // Fetch teams from API
 async function fetchTeams() {
     try {
-        const response = await fetch(`http://localhost:3000/api/teams/allTeams/${id}`);
+        const response = await fetch(`/api/teams/allTeams/${id}`);
         if (!response.ok) throw new Error('Failed to fetch teams');
         const data = await response.json();
         teams = data.map((team, index) => ({
