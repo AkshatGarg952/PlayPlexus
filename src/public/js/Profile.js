@@ -1,38 +1,6 @@
 
 
-// document.getElementById('modalClose').addEventListener('click', () => closeModal('profileModal'));
-// document.getElementById('requestModalClose').addEventListener('click', () => closeModal('requestModal'));
-// document.getElementById('cancelRequest').addEventListener('click', () => closeModal('requestModal'));
-// document.getElementById('modalOverlay').addEventListener('click', () => closeModal('profileModal'));
-// document.querySelector('#requestModal .modal-overlay').addEventListener('click', () => closeModal('requestModal'));
 
-// // Toggle activity type
-// const sportToggle = document.getElementById('sportToggle');
-// const gameToggle = document.getElementById('gameToggle');
-// const sportSelectGroup = document.getElementById('sportSelectGroup');
-// const gameSelectGroup = document.getElementById('gameSelectGroup');
-// const venueGroup = document.getElementById('venueGroup');
-// const platformGroup = document.getElementById('platformGroup');
-
-// sportToggle.addEventListener('click', () => {
-//     sportToggle.classList.add('active');
-//     gameToggle.classList.remove('active');
-//     document.getElementById('requestType').value = 'sport';
-//     sportSelectGroup.classList.remove('hidden');
-//     venueGroup.classList.remove('hidden');
-//     gameSelectGroup.classList.add('hidden');
-//     platformGroup.classList.add('hidden');
-// });
-
-// gameToggle.addEventListener('click', () => {
-//     gameToggle.classList.add('active');
-//     sportToggle.classList.remove('active');
-//     document.getElementById('requestType').value = 'game';
-//     gameSelectGroup.classList.remove('hidden');
-//     platformGroup.classList.remove('hidden');
-//     sportSelectGroup.classList.add('hidden');
-//     venueGroup.classList.add('hidden');
-// });
 
 
 // Navbar toggle
