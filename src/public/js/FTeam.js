@@ -42,7 +42,7 @@ function debounce(func, wait) {
 
 async function fetchTeams() {
     try {
-        const response = await fetch(`https://playplexus.onrender.com/api/teams/filter/${playObj}/${locaObj}/${id}`);
+        const response = await fetch(`/api/teams/filter/${playObj}/${locaObj}/${id}`);
         if (!response.ok) throw new Error('Failed to fetch teams');
         const data = await response.json();
         console.log(data);
@@ -562,7 +562,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Send to backend and get response
             // Replace '/chatbot/message' with your actual endpoint
-            fetch(`https://playplexus.onrender.com/api/chats/ask/${userId}/${teamId}`, {
+            fetch(`/api/chats/ask/${userId}/${teamId}`, {
                 method: 'POST',
                 headers: {
       "Content-Type": "application/json",
@@ -622,7 +622,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 const link = document.createElement('a');
-link.href = `http://localhost:3000${message.link}`;
+link.href = `${message.link}`;
 link.textContent = message.link;
 
 // Append anchor to div
