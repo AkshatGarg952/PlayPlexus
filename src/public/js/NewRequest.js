@@ -195,7 +195,7 @@ function displayRequests(requestsToDisplay) {
 // Handle accept/reject actions
 async function handleRequestAction(requestId, action) {
     try {
-        const response = await fetch(`http://localhost:3000/api/requests/update/${requestId}`, {
+        const response = await fetch(`/api/requests/update/${requestId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -347,5 +347,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial fetch
-    fetchRequests(`http://localhost:3000/api/requests/newdetails`);
+    fetchRequests(`/api/requests/newdetails`);
 });
