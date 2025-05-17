@@ -211,6 +211,7 @@ async function fetchRequests(url) {
     try {
         const id = userId || teamId;
         const updatedUrl = `${url}/${id}`;
+        console.log(updateUrl);
         const response = await fetch(updatedUrl);
         if (!response.ok) throw new Error('Failed to fetch requests');
         const data = await response.json();
