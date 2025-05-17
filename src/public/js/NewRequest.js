@@ -13,37 +13,182 @@ let teamId = teamObj ? teamObj._id : null;
 
 
 
-async function acceptR(id){
-   const aId = userId || teamId;
-    const response = await fetch(`/api/requests/accept/${aId}/${id}`, {
-        method: 'GET',
-        credentials:'include'
-    })
-    location.reload();
+const socket = io({
+    transports: ['websocket', 'polling']
+});
+
+
+function acceptR(requestId, requestCard) {
+
+    const actionButtons = requestCard.querySelector('#both');
+    const status = requestCard.querySelector('.status');
+    if(status){
+    status.textContent = 'Accepted';
+    status.className = 'status accepted';
+    }
+if (actionButtons) {
+    const statusDiv = document.createElement('div');
+    statusDiv.className = 'action-row status-button';
+    statusDiv.innerHTML = `
+                        <div class="action-row status-button">
+                            <button class="action-btn btn-accept" disabled>
+                                <i class="fa-solid fa-info-circle"></i> accepted
+                            </button>
+                        </div>
+                    `;
+
+
+    
+    actionButtons.replaceWith(statusDiv);
+}
+
+   
+    socket.emit('requestAction', { action: 'accept', requestId });
 }
 
 
-
-
-async function rejectR(id){
-    const aId = userId || teamId;
-    const response = await fetch(`/api/requests/reject/${aId}/${id}`, {
-        method: 'GET',
-        credentials:'include'
-    })
-    location.reload();
+function rejectR(requestId, requestCard) {
+    const actionButtons = requestCard.querySelector('#both');
+    const status = requestCard.querySelector('.status');
+    if(status){
+    status.textContent = 'Rejected';
+    status.className = 'status rejected';
     }
+if (actionButtons) {
+    const statusDiv = document.createElement('div');
+    statusDiv.className = 'action-row status-button';
+    statusDiv.innerHTML = `
+        <button class="action-btn btn-reject" disabled>
+            <i class="fa-solid fa-info-circle"></i> rejected
+        </button>
+    `;
 
+    
+    actionButtons.replaceWith(statusDiv);
+}
+
+
+    
+    socket.emit('requestAction', { action: 'reject', requestId });
+}
+
+
+function cancelR(requestId, requestCard) {
+   const cancelDiv = requestCard.querySelector('#cancell');
+   const status = requestCard.querySelector('.status');
+    if(status){
+    status.textContent = 'Cancelled';
+    status.className = 'status cancelled';
+    }
+if (cancelDiv) {
+    const statusDiv = document.createElement('div');
+    statusDiv.className = 'action-row status-button';
+    statusDiv.innerHTML =  `
+                            <button class="action-btn btn-status" disabled>
+                                <i class="fa-solid fa-info-circle"></i> cancelled
+                            </button>
+                      
+                    `;
+
+    cancelDiv.replaceWith(statusDiv);
+}
+    console.log(requestId);
+    socket.emit('requestAction', { action: 'cancel', requestId });
+}
+
+
+socket.on('receive', (m) => {
+  console.log('Received event:', m);
+  console.log(getAllRequestCardIds());
+  const requestCard = document.querySelector(`.request-card[data-request-id="${m.id}"]`);
  
-    async function cancelR(id){
-        const aId = userId || teamId;
-        const response = await fetch(`/api/requests/cancel/${aId}/${id}`, {
-            method: 'GET',
-            credentials:'include'
-        })
+  console.log(requestCard.getAttribute('data-request-id'));
 
-        location.reload();
-        }    
+  if (!requestCard) {
+    console.warn(`Request card with ID ${m.id} not found.`);
+    return;
+  }
+
+  
+
+  
+  if (m.status === 'accepted') {
+    
+    const cancelDiv = requestCard.querySelector('#cancell');
+    const status = requestCard.querySelector('.status');
+    if(status){
+    status.textContent = 'Accepted';
+    status.className = 'status accepted';
+    }
+if (cancelDiv) {
+    const statusDiv = document.createElement('div');
+    statusDiv.className = 'action-row status-button';
+    statusDiv.innerHTML = `
+        <button class="action-btn btn-accept" disabled>
+            <i class="fa-solid fa-info-circle"></i> accepted
+        </button>
+    `;
+
+    
+    cancelDiv.replaceWith(statusDiv);
+}
+
+
+  } 
+  
+  
+  else if (m.status === 'rejected') {
+    const cancelDiv = requestCard.querySelector('#cancell');
+    const status = requestCard.querySelector('.status');
+    if(status){
+    status.textContent = 'Rejected';
+    status.className = 'status rejected';
+    }
+if (cancelDiv) {
+    const statusDiv = document.createElement('div');
+    statusDiv.className = 'action-row status-button';
+    statusDiv.innerHTML = `
+                        <div class="action-row status-button">
+                            <button class="action-btn btn-reject" disabled>
+                                <i class="fa-solid fa-info-circle"></i> rejected
+                            </button>
+                        </div>
+                    `;
+
+    cancelDiv.replaceWith(statusDiv);
+}
+  }
+  
+  else if (m.status === 'cancelled') {
+    const actionButtons = requestCard.querySelector('#both');
+    const status = requestCard.querySelector('.status');
+    if(status){
+    status.textContent = 'Cancelled';
+    status.className = 'status cancelled';
+    }
+if (actionButtons) {
+    const statusDiv = document.createElement('div');
+    statusDiv.className = 'action-row status-button';
+    statusDiv.innerHTML = `
+                        <div class="action-row status-button">
+                            <button class="action-btn btn-status" disabled>
+                                <i class="fa-solid fa-info-circle"></i> cancelled
+                            </button>
+                        </div>
+                    `;
+    actionButtons.replaceWith(statusDiv);
+}
+  }
+
+  filteredRequests = filteredRequests.map(req =>
+    req.id === m.requestId ? { ...req, status: m.status } : req
+  );
+
+  const requestDetail = document.getElementById('requestDetail');
+  if (requestDetail && requestDetail.querySelector('h3')?.textContent === m.sender) {
+    showRequestDetails(m.requestId);
+  }
+});   
 
 
 
@@ -89,7 +234,7 @@ function displayRequests(requestsToDisplay) {
     requestsToDisplay.forEach(request => {
         const requestCard = document.createElement('div');
         requestCard.className = 'request-card';
-        
+        requestCard.setAttribute('data-request-id', request.id);
         // Check conditions for buttons
         const isReceiver = request.sender !== name;
         const isSender = request.sender === name;
@@ -122,12 +267,12 @@ function displayRequests(requestsToDisplay) {
                             <i class="fa-solid fa-eye"></i> View Details
                         </button>
                     </div>
-                    ${showActionButtons ?`
-                        <div class="action-row action-buttons">
-                            <button class="action-btn btn-accept" onclick="acceptR('${request.id}')">
+                    ${showActionButtons ? `
+                        <div class="action-row action-buttons" id="both">
+                            <button class="action-btn btn-accept" id="accept-button" onclick="acceptR('${request.id}', this.closest('.request-card'))">
                                 <i class="fa-solid fa-check"></i> Accept
                             </button>
-                            <button class="action-btn btn-reject" onclick="rejectR('${request.id}')">
+                            <button class="action-btn btn-reject" id="reject-button" onclick="rejectR('${request.id}', this.closest('.request-card'))">
                                 <i class="fa-solid fa-times"></i> Reject
                             </button>
                         </div>
@@ -141,7 +286,14 @@ function displayRequests(requestsToDisplay) {
                     ` : ''}
                     ${rejected1 ? `
                         <div class="action-row status-button">
-                            <button class="action-btn btn-cancel" disabled>
+                            <button class="action-btn btn-reject" disabled>
+                                <i class="fa-solid fa-info-circle"></i> ${request.status}
+                            </button>
+                        </div>
+                    ` : ''}
+                    ${cancelled1 ? `
+                        <div class="action-row status-button">
+                            <button class="action-btn btn-status" disabled>
                                 <i class="fa-solid fa-info-circle"></i> ${request.status}
                             </button>
                         </div>
@@ -154,8 +306,8 @@ function displayRequests(requestsToDisplay) {
                         </div>
                     ` : ''}
                     ${showCancelButton ? `
-                        <div class="action-row cancel-button">
-                            <button class="action-btn btn-cancel" onclick="cancelR('${request.id}')">
+                        <div class="action-row cancel-button" id="cancell">
+                            <button class="action-btn btn-cancel" id="cancel-button" onclick="cancelR('${request.id}', this.closest('.request-card'))">
                                 <i class="fa-solid fa-ban"></i> Cancel Request
                             </button>
                         </div>
@@ -172,6 +324,13 @@ function displayRequests(requestsToDisplay) {
                     ${rejected2 ? `
                         <div class="action-row status-button">
                             <button class="action-btn btn-reject" disabled>
+                                <i class="fa-solid fa-info-circle"></i> ${request.status}
+                            </button>
+                        </div>
+                    ` : ''}
+                    ${cancelled2 ? `
+                        <div class="action-row status-button">
+                            <button class="action-btn btn-status" disabled>
                                 <i class="fa-solid fa-info-circle"></i> ${request.status}
                             </button>
                         </div>
@@ -347,5 +506,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial fetch
-    fetchRequests(`/api/requests/newdetails`);
+    fetchRequests(`http://localhost:3000/api/requests/newdetails`);
 });
