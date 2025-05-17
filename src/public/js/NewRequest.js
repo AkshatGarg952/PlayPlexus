@@ -17,6 +17,17 @@ const socket = io({
     transports: ['websocket', 'polling']
 });
 
+socket.on('connect', () => {
+            console.log('Connected to Socket.IO server with ID:', socket.id);
+            socket.emit('joinRoom', roomId);
+            console.log('Emitted joinRoom:', roomId);
+        });
+
+        socket.on('connect_error', (error) => {
+            console.error('Socket.IO connection error:', error);
+            alert('Failed to connect to chat server: ' + error.message);
+        });
+
 
 function acceptR(requestId, requestCard) {
 
