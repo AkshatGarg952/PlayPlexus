@@ -506,5 +506,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initial fetch
-    fetchRequests(`http://localhost:3000/api/requests/newdetails`);
+    fetchRequests(`/api/requests/newdetails`);
 });
