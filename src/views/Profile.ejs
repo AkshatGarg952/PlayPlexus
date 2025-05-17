@@ -135,22 +135,26 @@
                     <div class="detail-item"><strong>Name:</strong> <span id="displayName"> <%= user.name %></span></div>
                     <div class="detail-item"><strong>Username:</strong> <span id="displayUsername"> <%= user.username %></span></div>
                     <div class="detail-item"><strong>Email:</strong> <span id="displayEmail"><%= user.email %></span></div>
+                    <div class="detail-item"><strong>Bio:</strong> <span id="displayBio"><%= user.bio %></span></div>
                     <div class="detail-item"><strong>Phone:</strong> <span id="displayPhone"><%= user.phone %></span></div>
-                    <div class="detail-item"><strong>Location:</strong> <span id="displayLocation"><%= user.location %></span></div>
-                    <div class="detail-item"><strong>Password:</strong> <span id="displayPassword"><%= user.password %></span></div>
+                   
+                    
                     <div class="detail-item"><strong>Sports:</strong> <span id="displaySports"><%= user.sports %></span></div>
                     <div class="detail-item"><strong>Online Games:</strong> <span id="displayOnlineGames"><%= user.onlineGames %></span></div>
-                    <div class="detail-item"><strong>Bio:</strong> <span id="displayBio"><%= user.bio %></span></div>
+                     <div class="detail-item"><strong>Location:</strong> <span id="displayLocation"><%= user.location %></span></div>
+                    
                 <% } else{ %>
                     <div class="detail-item"><strong>Name:</strong> <span id="displayName"><%= team.name %></span></div>
                     <div class="detail-item"><strong>Username:</strong> <span id="displayUsername"><%= team.leader %></span></div>
                     <div class="detail-item"><strong>Email:</strong> <span id="displayEmail"><%= team.email %></span></div>
+                    <div class="detail-item"><strong>Bio:</strong> <span id="displayBio"><%= team.bio %></span></div>
                     <div class="detail-item"><strong>Phone:</strong> <span id="displayPhone"><%= team.phone %></span></div>
-                    <div class="detail-item"><strong>Location:</strong> <span id="displayLocation"><%= team.location %></span></div>
-                    <div class="detail-item"><strong>Password:</strong> <span id="displayPassword"><%= team.password %></span></div>
+                    
+                    
                     <div class="detail-item"><strong>Sports:</strong> <span id="displaySports"><%= team.sports %></span></div>
                     <div class="detail-item"><strong>Online Games:</strong> <span id="displayOnlineGames"><%= team.onlineGames %></span></div>
-                    <div class="detail-item"><strong>Bio:</strong> <span id="displayBio"><%= team.bio %></span></div>
+                    <div class="detail-item"><strong>Location:</strong> <span id="displayLocation"><%= team.location %></span></div>
+                    
                 <% } %>    
                 
             </div>
@@ -225,15 +229,7 @@
                     
                 </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <% if(user) { %>
-                        <input type="password" id="password" name="password" placeholder="Enter your password" value="<%= user.password %>">
-                        <% } else { %>
-                            <input type="password" id="password" name="password" placeholder="Enter your password" value="<%= team.password %>">
-                        <% } %>
-                    
-                </div>
+                
                 <div class="form-group">
                     <label for="sports">Sports (comma-separated)</label>
                     <% if(user) { %>
