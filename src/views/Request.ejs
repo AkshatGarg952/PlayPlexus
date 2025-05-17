@@ -71,14 +71,13 @@
                 </div>
                 <ul class="sidebar-menu">
 
-                     <li>
+                    <li>
                         <% if(user) { %>
-                            <a href="/mainPage/user/<%= user.username%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">Dashboard</span></a>
+                            <a href="/mainPage/user/<%= user.username%>/null"><i class="fa-solid fa-table-columns"></i> <span class="menu-text">Dashboard</span></a>
                         <%} else if(team) { %>
-                            <a href="/mainPage/team/null/<%= team.email%>"><i class="fa-solid fa-users"></i> <span class="menu-text">Dashboard</span></a>
+                            <a href="/mainPage/team/null/<%= team.email%>"><i class="fa-solid fa-table-columns"></i> <span class="menu-text">Dashboard</span></a>
                         <% }%>
                     </li>
-
                     
                     <li>
                         <% if(user) { %>
