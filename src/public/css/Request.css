@@ -321,10 +321,15 @@ button, select, input, textarea {
 
 /* Users Container */
 .users-container {
+    /* display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem; */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
     margin-bottom: 2rem;
+    justify-items: center;
 }
 
 /* User Card Styles */
@@ -918,13 +923,23 @@ button, select, input, textarea {
 
 /* Request Card Styles */
 .request-card {
-    position: relative;
+    /* position: relative;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow-md);
     transition: all var(--transition-normal);
     width: 320px; /* Adjusted width */
-    height: 200px; /* Adjusted height */
+    /* height: 200px; /* Adjusted height */
+    /* transform-style: preserve-3d;
+    perspective: 1000px; */
+
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    width: 320px; /* Keep the fixed width */
+    height: 240px;
     transform-style: preserve-3d;
     perspective: 1000px;
 }
@@ -1417,7 +1432,7 @@ button, select, input, textarea {
 /* Responsive adjustments */
 @media (max-width: 480px) {
     .request-card {
-        height: 260px; /* Slightly more height for smaller screens */
+        height: 260px; 
     }
 
     .action-row {
@@ -1430,5 +1445,24 @@ button, select, input, textarea {
 
     .cancel-button .btn-cancel {
         max-width: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .users-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+/* For very small screens, use single column layout */
+@media (max-width: 480px) {
+    .users-container {
+        grid-template-columns: 1fr; /* Single column */
+    }
+    
+    /* The request card can take a bit more width on very small screens */
+    .request-card {
+        width: 100%; /* Allow the card to be responsive */
+        max-width: 320px; /* But cap its maximum width */
     }
 }
