@@ -37,7 +37,7 @@ let id = userId || teamId;
 // Fetch sent requests
 async function fetchSentUsers(id) {
     try {
-        const response = await fetch(`/api/requests/sender/${id}`);
+        const response = await fetch(`http://localhost:3000/api/requests/sender/${id}`);
         if (!response.ok) throw new Error('Failed to fetch sent requests');
         const data = await response.json();
         
@@ -58,7 +58,7 @@ async function fetchSentUsers(id) {
 // Fetch received requests
 async function fetchReceivedUsers(id) {
     try {
-        const response = await fetch(`/api/requests/receiver/${id}`);
+        const response = await fetch(`http://localhost:3000/api/requests/receiver/${id}`);
         if (!response.ok) throw new Error('Failed to fetch received requests');
         const data = await response.json();
         
@@ -116,10 +116,9 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Toggle Sidebar
-sidebarToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
-    localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+// Sidebar toggle
+document.getElementById('sidebarToggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('collapsed');
 });
 
 // Initialize Charts
@@ -363,21 +362,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         sidebar.classList.add('collapsed');
     }
 
-    // Fetch data from APIs
+    
     await Promise.all([
         fetchSentUsers(id),
         fetchReceivedUsers(id)
     ]);
 
-    // Initialize charts after data is fetched
+    
     toggleGraph('sent'); // Start with "Requests You Sent" view
 });
 
 
-const menuItems = document.querySelectorAll('.sidebar-menu li');
-menuItems.forEach(item => {
-    item.addEventListener('click', () => {
-        menuItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-    });
-});
+// const menuItems = document.querySelectorAll('.sidebar-menu li');
+// menuItems.forEach(item => {
+//     item.addEventListener('click', () => {
+//         menuItems.forEach(i => i.classList.remove('active'));
+//         item.classList.add('active');
+//     });
+// });
