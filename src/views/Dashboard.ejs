@@ -46,7 +46,7 @@
     <!-- Content Container -->
     <div class="content-container">
         <!-- Left Sidebar (Unchanged) -->
-        <div class="sidebar" id="sidebar">
+         <div class="sidebar" id="sidebar">
             <div class="sidebar-toggle" id="sidebarToggle">
                 <i class="fa-solid fa-chevron-left"></i>
             </div>
@@ -55,22 +55,24 @@
                     <div class="avatar">
                         <% if(user){ %>
                             <img src="<%= user.profileImage %>" alt="<%= user.name %>">
-                        <% } else if(team){ %>
+                            <% } else if(team){ %>
+
                             <img src="<%= team.logo %>" alt="<%= team.name %>">
-                        <% } %>   
+                            <% } %>  
                     </div>
                     <div class="user-info">
                         <% if(user){ %>
-                        <h3><%= user.name %></h3>
-                        <p><%= user.username %></p>
-                        <% } else if(team){ %>
-                            <h3><%= team.name %></h3>
-                            <p><%= team.leader %></p>
-                        <% } %>
+                            <h3><%= user.name %></h3>
+                            <p><%= user.username %></p>
+                            <% } else if(team){ %>
+    
+                                <h3><%= team.name %></h3>
+                                <p><%= team.leader %></p>
+                                <% } %>
                     </div>
                 </div>
                 <ul class="sidebar-menu">
-                      <li class="active">
+                     <li class="active">
                         <% if(user) { %>
                             <a href="/mainPage/user/<%= user.username%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">Dashboard</span></a>
                         <%} else if(team) { %>
@@ -78,6 +80,7 @@
                         <% }%>
                     </li>
 
+                    
                     <li>
                         <% if(user) { %>
                             <a href="/allPlayers/<%= user._id%>/null"><i class="fa-solid fa-users"></i> <span class="menu-text">All Players</span></a>
@@ -98,12 +101,13 @@
                         <%} else if(team) { %>
                             <a href="/allRequests/null/<%= team._id %>"><i class="fa-solid fa-inbox"></i> <span class="menu-text">All Requests</span></a>
                         <% } %>
+
                     </li>
                     <li>
                         <% if(user) { %>
-                            <a href="/profile/<%= user._id %>/null">  <i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                            <a href = "/profile/<%= user._id %>/null">  <i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
                         <%} else if(team) { %>
-                            <a href="/profile/null/<%= team._id %>"><i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
+                            <a href= "/profile/null/<%= team._id %>"><i class="fa-solid fa-user"></i> <span class="menu-text">My Profile</span></a>
                         <% } %>
                     </li>
                 </ul>
