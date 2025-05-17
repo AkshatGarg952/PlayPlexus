@@ -77,7 +77,7 @@
                    <a href="#" class="hero-btn primary-btn register-btn" style="text-decoration: none;">Get Started</a>
               <% } %>
                 
-                <button class="hero-btn secondary-btn">Try AI Chatbot</button>
+                <a href= "https://github.com/AkshatGarg952?tab=repositories" target="_blank" style="text-decoration: none;" class="hero-btn secondary-btn">Star It on Github</a>
             </div>
         </div>
     </section>
@@ -377,7 +377,7 @@
         <h2 class="auth-modal-title">Register as Player</h2>
       
         <form class="auth-form" id="playerRegisterForm" action="/api/users/register" method="POST" enctype="multipart/form-data">
-          <!-- Profile Image -->
+          
           <div class="form-group">
     <label for="profileImage">Profile Image</label>
     <div class="image-preview" id="playerProfileImagePreview">
@@ -387,43 +387,43 @@
     <label for="profileImage"><i class="fas fa-upload"></i> Choose image</label>
 </div>
       
-          <!-- Name -->
+          
           <div class="form-group">
             <label for="name">Full Name *</label>
             <input type="text" id="name" name="name" class="form-input" required minlength="3" maxlength="50">
           </div>
       
-          <!-- Username -->
+          
           <div class="form-group">
             <label for="username">Username *</label>
             <input type="text" id="username" name="username" class="form-input" required minlength="3" maxlength="50">
           </div>
       
-          <!-- Email -->
+          
           <div class="form-group">
             <label for="email">Email *</label>
             <input type="email" id="email" name="email" class="form-input" required pattern="^\S+@\S+\.\S+$">
           </div>
       
-          <!-- Location -->
+          
           <div class="form-group">
             <label for="location">Location *</label>
             <input type="text" id="location" name="location" class="form-input" required minlength="3" maxlength="50">
           </div>
       
-          <!-- Phone -->
+          
           <div class="form-group">
             <label for="phone">Phone *</label>
             <input type="tel" id="phone" name="phone" class="form-input" required>
           </div>
       
-          <!-- Bio -->
+          
           <div class="form-group">
             <label for="bio">Bio</label>
             <textarea id="bio" name="bio" class="form-input" placeholder="Tell us about yourself"></textarea>
           </div>
       
-          <!-- Sports -->
+          
           <div class="form-group">
             <label for="sports">Sports</label>
             <input type="text" id="sports" name="sports" class="form-input" placeholder="e.g., football, basketball">
@@ -431,7 +431,7 @@
           </div>
 
 
-          <!-- Online Games -->
+          
           <div class="form-group">
             <label for="onlineGames">Online Games</label>
             <input type="text" id="onlineGames" name="onlineGames" class="form-input" placeholder="e.g., BGMI, Valorant">
@@ -440,7 +440,7 @@
       
           <input type="hidden" name="onlineGamesJSON" id="onlineGamesJSON">
       
-          <!-- Password -->
+          
           <div class="form-group">
             <label for="password">Password *</label>
             <input type="password" id="password" name="password" class="form-input" required minlength="6">
@@ -498,7 +498,7 @@
                 <input type="text" id="teamSports" name="sports" class="form-input" placeholder="Enter sports (e.g., football, basketball)">
                 <small class="form-hint">Separate sports with commas</small>
             </div>
-            <!-- Online Games -->
+            
           <div class="form-group">
             <label for="onlineGames">Online Games</label>
             <input type="text" id="onlineGames" name="onlineGames" class="form-input" placeholder="e.g., BGMI, Valorant">
