@@ -863,12 +863,24 @@ button, select, input, textarea {
         background: var(--bg-sidebar);
         flex-direction: column;
         padding: 1rem;
-        transform: translateX(100%);
-        transition: transform var(--transition-normal);
+        /* Option 1: Simple hide/show without animation */
+        display: none;
+        
+        /* Option 2: Uncomment the following for a fade effect instead
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--transition-normal), visibility var(--transition-normal);
+        */
     }
 
     .nav-links.active {
-        transform: translateX(0);
+        /* Option 1: Simple hide/show without animation */
+        display: flex;
+        
+        /* Option 2: Uncomment the following for a fade effect instead
+        opacity: 1;
+        visibility: visible;
+        */
     }
 
     .nav-link {
