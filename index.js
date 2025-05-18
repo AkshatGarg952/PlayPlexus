@@ -15,6 +15,7 @@ import http from 'http';
 import { Server } from 'socket.io';
 import mongoose from 'mongoose';
 import Message from "./src/features/chats/chat.schema.js"
+import Request from "./src/features/requests/request.schema.js"
 import {startExpiryJob} from "./src/features/requests/expiration.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
