@@ -320,6 +320,31 @@ io.on('connection', (socket) => {
     }
   });
 
+    socket.on('requestAction', async ({ action, requestId: rId }) =>{
+       if (action === 'accept') {
+    const request = await Request.findById(rId);
+    request.status = 'accepted';
+    await request.save();
+     io.emit('receive', {status: request.status,id: request._id});
+  }
+
+  else if(action === 'reject'){
+    const request = await Request.findById(rId);
+    request.status = 'rejected';
+    await request.save();
+     io.emit('receive', {status: request.status,id: request._id});
+  }
+
+  else if(action === 'cancel'){
+    const request = await Request.findById(rId);
+    request.status = 'cancelled';
+    await request.save();
+      io.emit('receive', {status: request.status, id: request._id});
+  }
+
+
+  })
+
   socket.on('disconnect', () => {
     console.log('Socket disconnected:', socket.id);
   });
