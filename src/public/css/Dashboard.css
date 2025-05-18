@@ -453,9 +453,7 @@ ul {
   
 
 @media (max-width: 768px) {
-
-
-     .menu-toggle {
+    .menu-toggle {
         display: block;
     }
 
@@ -467,24 +465,42 @@ ul {
         background: var(--bg-sidebar);
         flex-direction: column;
         padding: 1rem;
-        transform: translateX(100%);
-        transition: transform var(--transition-normal);
+        /* Option 1: Simple hide/show without animation */
+        display: none;
+        
+        /* Option 2: Uncomment the following for a fade effect instead
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--transition-normal), visibility var(--transition-normal);
+        */
     }
 
     .nav-links.active {
-        transform: translateX(0);
-    }
-    
-    .nav-link {
-        padding: 0.5rem;
-        border-bottom: none;
-    }
-    
-    .nav-link i {
-        font-size: 1.2rem;
+        /* Option 1: Simple hide/show without animation */
+        display: flex;
+        
+        /* Option 2: Uncomment the following for a fade effect instead
+        opacity: 1;
+        visibility: visible;
+        */
     }
 
-    
+    .nav-link {
+        padding: 0.8rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .filter-item {
+        min-width: 100%;
+    }
+
+    .users-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
 }
 
 @media (max-width: 480px) {
