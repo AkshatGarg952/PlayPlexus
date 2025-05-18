@@ -18,8 +18,6 @@ const socket = io({
 
 socket.on('connect', () => {
             console.log('Connected to Socket.IO server with ID:', socket.id);
-            socket.emit('joinRoom', roomId);
-            console.log('Emitted joinRoom:', roomId);
         });
 
         socket.on('connect_error', (error) => {
