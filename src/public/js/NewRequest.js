@@ -253,10 +253,12 @@ function displayRequests(requestsToDisplay) {
         const accepted1 = isReceiver && status === 'accepted';
         const rejected1 = isReceiver && status === 'rejected';
         const expired1 = isReceiver && status === 'expired';
+        const cancelled1 = isReceiver && status === 'cancelled';
         const showCancelButton = isSender && status==='pending';
         const accepted2 = isSender && status==='accepted';
         const rejected2 = isSender && status==='rejected';
         const expired2 = isSender && status==='expired';
+        const cancelled2 = isSender && status === 'cancelled';
         requestCard.innerHTML = `
             <div class="card-bg"></div>
             <div class="card-content">
