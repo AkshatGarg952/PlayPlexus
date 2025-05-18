@@ -325,6 +325,7 @@ io.on('connection', (socket) => {
        if (action === 'accept') {
     const request = await Request.findById(rId);
     request.status = 'accepted';
+           request.seen = true;
     await request.save();
      io.emit('receive', {status: request.status,id: request._id});
   }
@@ -332,6 +333,7 @@ io.on('connection', (socket) => {
   else if(action === 'reject'){
     const request = await Request.findById(rId);
     request.status = 'rejected';
+      request.seen = true;
     await request.save();
      io.emit('receive', {status: request.status,id: request._id});
   }
@@ -339,6 +341,7 @@ io.on('connection', (socket) => {
   else if(action === 'cancel'){
     const request = await Request.findById(rId);
     request.status = 'cancelled';
+      
     await request.save();
       io.emit('receive', {status: request.status, id: request._id});
   }
