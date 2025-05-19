@@ -7,7 +7,7 @@ const requestsPerPage = 6;
 
 let userObj = window.userObj || {};
 let teamObj = window.teamObj || {};
-let name = userObj.username || teamObj.leader;
+let name = userObj.username || teamObj.name;
 let userId = userObj ? userObj._id : null;
 let teamId = teamObj ? teamObj._id : null;
 
