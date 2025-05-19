@@ -50,10 +50,10 @@ async function fetchTeams() {
             phone: team.phone,
             bio: team.bio,
             city: team.location,
-            logo: mockProfilePics[index % mockProfilePics.length],
+            logo: team.logo,
             sports: Array.isArray(team.sports) ? team.sports.join(', ') : team.sports,
             email: team.email,
-            online_games: Array.isArray(team.onlineGames?.game) ? team.onlineGames.game.join(', ') : team.onlineGames?.game || ''
+online_games:Array.isArray(team.onlineGames) ? team.onlineGames.join(', ') : team.onlineGames,
         }));
         filteredTeams = [...teams]; // Initialize filteredTeams with all teams
         displayTeams(filteredTeams.slice(0, teamsPerPage));
