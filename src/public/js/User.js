@@ -44,10 +44,10 @@ async function fetchUsers() {
             phone: user.phone,
             bio: user.bio,
             city: user.location,
-            profile_picture: mockProfilePics[index % mockProfilePics.length],
+           profile_picture: user.profileImage,
             sports: Array.isArray(user.sports) ? user.sports.join(', ') : user.sports,
             email: user.email,
-            online_games: Array.isArray(user.onlineGames?.game) ? user.onlineGames.game.join(', ') : user.onlineGames?.game || ''
+            online_games: Array.isArray(user.onlineGames) ? user.onlineGames.join(', ') : user.onlineGames,
         }));
         filteredUsers = [...users]; // Initialize filteredUsers with all users
         displayUsers(filteredUsers.slice(0, usersPerPage));
