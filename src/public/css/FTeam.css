@@ -4,12 +4,12 @@
 /* CSS Variables */
 :root {
     /* Main colors - different from landing but complementary */
-    --primary-color: #6c5ce7;
-    --primary-light: #a29bfe;
-    --primary-dark: #5540dd;
-    --secondary-color: #fd79a8;
-    --secondary-light: #ffa6c9;
-    --secondary-dark: #e84393;
+   --primary-color: #7c4dff;
+    --primary-light: #b47cff;
+    --primary-dark: #5c33b5;
+    --secondary-color: #ff5c8d;
+    --secondary-light: #ff8aa7;
+    --secondary-dark: #d13e6a;
     
     /* Background & Text */
     --bg-dark: #0f0f1a;
