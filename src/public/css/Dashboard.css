@@ -129,6 +129,20 @@ ul {
 }
 
 /* Sidebar Styles */
+.user-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
 .sidebar {
     width: 260px;
     background-color: var(--bg-sidebar);
